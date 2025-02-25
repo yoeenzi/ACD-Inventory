@@ -3,20 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>ACD Smart Inventory System</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo-container"></div>
-        <p class="smart-inventory">SMART INVENTORY SYSTEM</p>
-        <input type="text" class="input-field" placeholder="Username">
-        <input type="password" class="input-field" placeholder="Password">
-        <button class="login-btn">LOG IN</button>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="ACD Logo.png" alt="ACD Logo" class="logo">
+            <div class="logo-text">SMART INVENTORY SYSTEM</div>
+        </div>
+        
+        <div class="nav-item active">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-box"></i>
+            <span>Inventory</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Daily Reports</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-qrcode"></i>
+            <span>Scan Item</span>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="toggle-btn active" id="light-mode">
+                <i class="fas fa-sun"></i>
+                <span>Light</span>
+            </div>
+            <div class="toggle-btn" id="dark-mode">
+                <i class="fas fa-moon"></i>
+                <span>Dark</span>
+            </div>
+        </div>
     </div>
     
-    <!-- Bottom Logo is OUTSIDE -->
-    <div class="bottom-logo">
-        <img src="hyundai.png" alt="Hyundai Logo">
+    <div class="main-content">
+        <div class="header">
+            <div class="greeting">
+                <h2>Hello Manticao - ACD<i class="fas fa-certificate verification-badge"></i></h2>
+                <span>Good Morning</span>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="user-container">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                
+                <div class="user-profile">
+                    <img src="lamelo.jfif" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">Manticao-ACD</div>
+                        <div class="user-role">Store Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="report-title">Stock Report</div>
+            
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color blue"></div>
+                    <span>Stock In</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color purple"></div>
+                    <span>Stock Out</span>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="empty-chart-message">No stock data available. Add products to view the report.</div>
+                <canvas id="stockChart" style="display: none;"></canvas>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="report-title">Item Summary</div>
+            
+            <div class="summary-container">
+                <div class="summary-item">
+                    <div class="summary-icon box">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Quantity in Hand</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-icon in">
+                        <i class="fas fa-arrow-circle-down"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Stock In Products</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-icon out">
+                        <i class="fas fa-arrow-circle-up"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Stock Out Products</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="asset-gallery">
+            <div class="asset-item">
+                <img src="excavator_1-removebg-preview.png" alt="Excavator 1">
+                <div class="asset-info">
+                    <div class="asset-name">Hyundai Excavator</div>
+                    <div class="asset-status">
+                        <div class="status-dot available"></div>
+                        <span>Available</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="asset-item">
+                <img src="excavator_2-removebg-preview.png" alt="Excavator 2">
+                <div class="asset-info">
+                    <div class="asset-name">Medium Excavator</div>
+                    <div class="asset-status">
+                        <div class="status-dot rented"></div>
+                        <span>In Use</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="asset-item">
+                <img src="excavator_3-removebg-preview.png" alt="Excavator 3">
+                <div class="asset-info">
+                    <div class="asset-name">Mini Excavator</div>
+                    <div class="asset-status">
+                        <div class="status-dot available"></div>
+                        <span>Available</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="asset-item">
+                <img src="excavator_4-removebg-preview.png" alt="Excavator 4">
+                <div class="asset-info">
+                    <div class="asset-name">Micro Excavator</div>
+                    <div class="asset-status">
+                        <div class="status-dot available"></div>
+                        <span>Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+        </div>
     </div>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
