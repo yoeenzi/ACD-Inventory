@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACD Smart Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="ACD Logo.png" alt="ACD Logo" class="logo">
+            <div class="logo-text">SMART INVENTORY SYSTEM</div>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </div>
+        
+        <div class="nav-item active">
+            <i class="fas fa-box"></i>
+            <span>Inventory</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Daily Reports</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-qrcode"></i>
+            <span>Scan Item</span>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="toggle-btn active" id="light-mode">
+                <i class="fas fa-sun"></i>
+                <span>Light</span>
+            </div>
+            <div class="toggle-btn" id="dark-mode">
+                <i class="fas fa-moon"></i>
+                <span>Dark</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="greeting">
+                <h2>Hello Manticao - ACD<i class="fas fa-certificate verification-badge"></i></h2>
+                <span>Good Morning</span>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="user-container">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                
+                <div class="user-profile">
+                    <img src="lamelo.jfif" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">Manticao-ACD</div>
+                        <div class="user-role">Store Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-bar">
+            <div class="search-item">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Item">
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Add Item
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-file-excel"></i>
+                    Make Excel
+                </button>
+                <button class="btn btn-outline">
+                    <i class="fas fa-filter"></i>
+                    Filter
+                </button>
+            </div>
+        </div>
+        
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th class="checkbox-cell">
+                        <input type="checkbox">
+                    </th>
+                    <th>Item Name</th>
+                    <th class="image-cell">Image</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Warehouse</th>
+                    <th>Amount</th>
+                    <th class="action-cell">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Dell Laptop</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>22 Hours Store</td>
+                    <td>1 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>CD-789B</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>3 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td>Conduit</td>
+                    <td class="image-cell">
+                        <img src="dell.jpg" alt="Laptop">
+                    </td>
+                    <td>G-7893</td>
+                    <td>IT Project Items</td>
+                    <td>HQMain Store</td>
+                    <td>5 pcs</td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <div class="page-info">
+                Showing 
+                <select>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+                Showing 1 to 10 out of 49 records
+            </div>
+            
+            <div class="page-numbers">
+                <div class="page-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="page-btn active">1</div>
+                <div class="page-btn">2</div>
+                <div class="page-btn">3</div>
+                <div class="page-btn">4</div>
+                <div class="page-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
