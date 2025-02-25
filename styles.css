@@ -1,0 +1,81 @@
+body {
+    background-color: #0D1E46;
+    display: flex;
+    flex-direction: column; /* Align logo properly */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Login Box */
+.login-container {
+    background-color: #e0e0e0;
+    padding: 50px 60px 80px;
+    border-radius: 100px 40px 100px 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main Logo */
+.logo-container {
+    width: 150px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background-image: url("ACD Logo.png"); /* FIXED BACKSLASH */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* Login Button */
+.login-btn {
+    width: 80%;
+    padding: 12px;
+    background-color: #b0b0b0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #0D1E46; /* Change text color (Example: Dark Blue) */
+    font-weight: bold; /* Makes it stand out */
+}
+
+.login-btn:hover {
+    background-color: #a0a0a0;
+}
+
+/* Bottom Logo (Hyundai) */
+.bottom-logo {
+    width: 200px; /* Adjusted size */
+    height: auto;
+    margin-top: 20px; /* Push it outside */
+}
+
+.bottom-logo img {
+    width: 100%;
+    height: 120px;
+}
+
+.smart-inventory {
+    color: #7a7a7a; /* Light grey color */
+    font-size: 14px; /* Adjust size if needed */
+    font-weight: 500; /* Match the weight */
+    text-align: center;
+    margin-top: -5px; /* Adjust positioning */
+}
