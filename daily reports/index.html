@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACD Smart Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="ACD Logo.png" alt="ACD">
+                    <span>SMART INVENTORY SYSTEM</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fas fa-th-large"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-box"></i> Inventory</a>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fas fa-chart-bar"></i> Daily Reports</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-qrcode"></i> Scan Item</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="theme-toggle">
+                <button id="light-mode" class="theme-btn active"><i class="fas fa-sun"></i> Light</button>
+                <button id="dark-mode" class="theme-btn"><i class="fas fa-moon"></i> Dark</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-welcome">
+                    <h1>Hello Manticao - ACD <span class="wave">👋</span></h1>
+                    <p>Good Morning</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-global">
+                        <input type="text" placeholder="Search">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <img src="lamelo.jfif" alt="Profile">
+                        <div class="user-info">
+                            <span class="user-name">Manticao-ACD</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search Item">
+                </div>
+            </div>
+            
+            <!-- Empty State / No Results -->
+            <div class="empty-state">
+                <div class="empty-illustration">
+                    <img src="nothing.png" alt="No items found illustration">
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="items-per-page">
+                    <span>Showing</span>
+                    <select id="items-per-page">
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+                
+                <div class="pagination-info">
+                    <span>Showing 1 to 6 out of 12 products</span>
+                </div>
+                
+                <div class="pagination-controls">
+                    <button class="page-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn page active">1</button>
+                    <button class="page-btn page">2</button>
+                    <button class="page-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+            </div>
+        </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
