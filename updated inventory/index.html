@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACD Smart Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="ACD Logo.png" alt="ACD Logo" class="logo">
+            <div class="logo-text">SMART INVENTORY SYSTEM</div>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+        </div>
+        
+        <div class="nav-item active">
+            <i class="fas fa-box"></i>
+            <span>Inventory</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Daily Reports</span>
+        </div>
+        
+        <div class="nav-item">
+            <i class="fas fa-qrcode"></i>
+            <span>Scan Item</span>
+        </div>
+        
+        <div class="theme-toggle">
+            <div class="toggle-btn active" id="light-mode">
+                <i class="fas fa-sun"></i>
+                <span>Light</span>
+            </div>
+            <div class="toggle-btn" id="dark-mode">
+                <i class="fas fa-moon"></i>
+                <span>Dark</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <div class="greeting">
+                <h2>Hello Manticao - ACD<i class="fas fa-certificate verification-badge"></i></h2>
+                <span>Good Morning</span>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="user-container">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                
+                <div class="user-profile">
+                    <img src="lamelo.jfif" alt="User Avatar" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">Manticao-ACD</div>
+                        <div class="user-role">Store Manager</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-bar">
+            <div class="search-item">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Item">
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Add Item
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-file-excel"></i>
+                    Make Excel
+                </button>
+                <button class="btn btn-outline">
+                    <i class="fas fa-filter"></i>
+                    Filter
+                </button>
+            </div>
+        </div>
+        
+        <table class="inventory-table">
+            <thead>
+                <tr>
+                    <th class="checkbox-cell">
+                        <input type="checkbox">
+                    </th>
+                    <th>Date</th>
+                    <th>Parts Number</th>
+                    <th>Parts Name</th>
+                    <th>Component</th>
+                    <th>Quantity</th>
+                    <th>Item Price</th>
+                    <th class="image-cell">Image</th>
+                    <th class="action-cell">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="checkbox-cell">
+                        <input type="checkbox">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="image-cell"></td>
+                    <td class="action-cell">
+                        <div class="action-buttons-cell">
+                            <div class="action-btn view-btn">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="action-btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="action-btn delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <div class="page-info">
+                Showing 
+                <select>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+                Showing 1 to 10 out of 49 records
+            </div>
+            
+            <div class="page-numbers">
+                <div class="page-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="page-btn active">1</div>
+                <div class="page-btn">2</div>
+                <div class="page-btn">3</div>
+                <div class="page-btn">4</div>
+                <div class="page-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+        </div>
+    </div>
+    <!-- Add Item Modal HTML -->
+<div class="modal" id="addItemModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add New Item</h3>
+            <span class="close-button">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="addItemForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="component">Component *</label>
+                        <div class="select-wrapper">
+                            <select id="component" required>
+                                <option value="" disabled selected>Choose Type</option>
+                                <option value="Engine">Engine</option>
+                                <option value="Hydraulic">Hydraulic</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Body">Body</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partsName">Parts Name *</label>
+                        <input type="text" id="partsName" placeholder="Enter item name" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="partsNumber">Parts Number *</label>
+                        <input type="text" id="partsNumber" placeholder="Enter serial number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pic">PIC *</label>
+                        <input type="text" id="pic" placeholder="Enter PIC" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="image">Image *</label>
+                        <div class="file-input-wrapper">
+                            <input type="text" id="imageDisplay" placeholder="Choose File" readonly>
+                            <label for="image" class="file-input-label">
+                                <i class="fas fa-paperclip"></i>
+                            </label>
+                            <input type="file" id="image" hidden accept="image/*">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity *</label>
+                        <input type="number" id="quantity" placeholder="Enter item number" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rack">Rack *</label>
+                        <div class="select-wrapper">
+                            <select id="rack" required>
+                                <option value="" disabled selected>Choose Rack</option>
+                                <option value="A1">A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                            </select>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <div class="date-input-wrapper">
+                            <input type="text" id="dateDisplay" readonly placeholder="Select a date">
+                            <input type="date" id="date" style="position: absolute; opacity: 0;">
+                            <label for="date" class="date-input-label">
+                                <i class="fas fa-calendar"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="itemPrice">Item Price *</label>
+                        <input type="number" id="itemPrice" placeholder="Enter price" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tax">Tax *</label>
+                        <input type="number" id="tax" placeholder="Enter Tax" min="0" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="totalAmount">Total Amount *</label>
+                        <input type="number" id="totalAmount" placeholder="Enter Amount" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="poNumber">PO Number *</label>
+                        <input type="text" id="poNumber" placeholder="Enter PO No." required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="ctplNumber">CTPL Number *</label>
+                        <input type="text" id="ctplNumber" placeholder="Enter CTPL No." required>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelButton" class="btn btn-light">Cancel</button>
+            <button id="applyButton" class="btn btn-primary">Apply</button>
+        </div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
