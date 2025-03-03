@@ -508,3 +508,325 @@ document.addEventListener('DOMContentLoaded', function() {
     // Call setup function for existing rows
     setupExistingRows();
 });
+
+// Add this code to your existing JavaScript file, preferably after your addItemModal implementation
+
+// Edit Item Modal Functionality
+function setupEditItemModal() {
+    // Check if modal already exists to avoid duplicates
+    if (document.getElementById('editItemModal')) return;
+    
+    // Clone the add item modal structure for the edit modal
+    const addItemModal = document.getElementById('addItemModal');
+    const editItemModal = addItemModal.cloneNode(true);
+    editItemModal.id = 'editItemModal';
+    
+    // Update the title and button text
+    const modalTitle = editItemModal.querySelector('h2');
+    if (modalTitle) modalTitle.textContent = 'Edit Item';
+    
+    const applyButton = editItemModal.querySelector('#applyButton');
+    if (applyButton) {
+        applyButton.id = 'updateButton';
+        applyButton.textContent = 'Update Item';
+    }
+    
+    const form = editItemModal.querySelector('form');
+    if (form) form.id = 'editItemForm';
+    
+    // Add hidden field to store the row reference
+    const hiddenRowIndex = document.createElement('input');
+    hiddenRowIndex.type = 'hidden';
+    hiddenRowIndex.id = 'editRowIndex';
+    form.appendChild(hiddenRowIndex);
+    
+    // Append the modal to the document body
+    document.body.appendChild(editItemModal);
+    
+    // Setup event listeners for the edit modal
+    setupEditModalEventListeners();
+}
+
+function setupEditModalEventListeners() {
+    const editItemModal = document.getElementById('editItemModal');
+    const closeButton = editItemModal.querySelector('.close-button');
+    const cancelButton = editItemModal.querySelector('#cancelButton');
+    const updateButton = document.getElementById('updateButton');
+    const editItemForm = document.getElementById('editItemForm');
+    
+    // Store the reference to the row being edited
+    let editingRow = null;
+    
+    // File input handling for edit modal
+    const imageInput = editItemModal.querySelector('input[type="file"]');
+    const imageDisplay = editItemModal.querySelector('#imageDisplay');
+    let uploadedImageData = null;
+    
+    if (imageInput) {
+        imageInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const file = this.files[0];
+                imageDisplay.value = file.name;
+                
+                // Read the image file and store its data URL
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageData = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    // Date input handling
+    const dateInput = editItemModal.querySelector('input[type="date"]');
+    const dateDisplay = editItemModal.querySelector('#dateDisplay');
+    
+    if (dateInput && dateDisplay) {
+        dateInput.addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            const day = String(selectedDate.getDate()).padStart(2, '0');
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            const year = selectedDate.getFullYear();
+            
+            dateDisplay.value = `${day}/${month}/${year}`;
+        });
+        
+        // Also make the dateDisplay open the date picker when clicked
+        dateDisplay.addEventListener('click', function() {
+            dateInput.focus();
+            if (typeof dateInput.showPicker === 'function') {
+                dateInput.showPicker();
+            }
+        });
+    }
+    
+    // Price calculations
+    const itemPriceInput = editItemModal.querySelector('#itemPrice');
+    const taxInput = editItemModal.querySelector('#tax');
+    const totalAmountInput = editItemModal.querySelector('#totalAmount');
+    const quantityInput = editItemModal.querySelector('#quantity');
+    
+    function calculateTotal() {
+        const price = parseFloat(itemPriceInput.value) || 0;
+        const tax = parseFloat(taxInput.value) || 0;
+        const quantity = parseInt(quantityInput.value) || 1;
+        
+        const total = (price * quantity) + tax;
+        totalAmountInput.value = total.toFixed(2);
+    }
+    
+    if (itemPriceInput && taxInput && quantityInput) {
+        itemPriceInput.addEventListener('input', calculateTotal);
+        taxInput.addEventListener('input', calculateTotal);
+        quantityInput.addEventListener('input', calculateTotal);
+    }
+    
+    // Close modal functions
+    function closeEditModal() {
+        editItemModal.classList.remove('active');
+        if (editItemForm) editItemForm.reset();
+        if (imageDisplay) imageDisplay.value = '';
+        if (dateDisplay) dateDisplay.value = '';
+        uploadedImageData = null;
+        editingRow = null;
+    }
+    
+    if (closeButton) closeButton.addEventListener('click', closeEditModal);
+    if (cancelButton) cancelButton.addEventListener('click', closeEditModal);
+    
+    // Click outside to close
+    editItemModal.addEventListener('click', function(event) {
+        if (event.target === editItemModal) {
+            closeEditModal();
+        }
+    });
+    
+    // Handle form submission to update the item
+    if (updateButton) {
+        updateButton.addEventListener('click', function() {
+            // Trigger HTML5 validation
+            if (editItemForm && !editItemForm.checkValidity()) {
+                editItemForm.reportValidity();
+                return;
+            }
+            
+            if (!editingRow) {
+                alert('No item selected for editing');
+                return;
+            }
+            
+            // Get form values
+            const component = editItemModal.querySelector('#component').value;
+            const partsName = editItemModal.querySelector('#partsName').value;
+            const partsNumber = editItemModal.querySelector('#partsNumber').value;
+            const quantity = editItemModal.querySelector('#quantity').value;
+            const itemPrice = editItemModal.querySelector('#itemPrice').value;
+            const date = dateDisplay.value;
+            const rack = editItemModal.querySelector('#rack') ? editItemModal.querySelector('#rack').value : 'N/A';
+            const tax = editItemModal.querySelector('#tax').value || '0.00';
+            const totalAmount = editItemModal.querySelector('#totalAmount').value || '0.00';
+            const pic = editItemModal.querySelector('#pic') ? editItemModal.querySelector('#pic').value : 'N/A';
+            const po = editItemModal.querySelector('#po') ? editItemModal.querySelector('#po').value : 'N/A';
+            const ctpl = editItemModal.querySelector('#ctpl') ? editItemModal.querySelector('#ctpl').value : 'N/A';
+            
+            // Update row in inventory table
+            updateTableRow(editingRow, component, partsName, partsNumber, quantity, itemPrice, date, uploadedImageData, rack, tax, totalAmount, pic, po, ctpl);
+            
+            // Close modal and reset form
+            closeEditModal();
+            
+            // Show success message
+            alert('Item updated successfully!');
+        });
+    }
+    
+    // Function to populate edit form with data from the row
+    window.populateEditForm = function(row) {
+        editingRow = row;
+        
+        // Extract data from the row
+        const date = row.querySelector('td:nth-child(2)').textContent;
+        const partsNumber = row.querySelector('td:nth-child(3)').textContent;
+        const partsName = row.querySelector('td:nth-child(4)').textContent;
+        const component = row.querySelector('td:nth-child(5)').textContent;
+        const quantity = row.querySelector('td:nth-child(6)').textContent;
+        const itemPrice = row.querySelector('td:nth-child(7)').textContent.replace(/[^\d.]/g, ''); // Remove currency symbol
+        
+        // Get additional data from data attributes
+        const rack = row.dataset.rack || 'N/A';
+        const tax = row.dataset.tax ? row.dataset.tax.replace(/[^\d.]/g, '') : '0.00';
+        const totalAmount = row.dataset.totalAmount ? row.dataset.totalAmount.replace(/[^\d.]/g, '') : itemPrice;
+        const pic = row.dataset.pic || 'N/A';
+        const po = row.dataset.po || 'N/A';
+        const ctpl = row.dataset.ctpl || 'N/A';
+        
+        // Get the image if available
+        const imgElement = row.querySelector('.image-cell img');
+        const imgSrc = imgElement && imgElement.src ? imgElement.src : null;
+        
+        // Set values in the form
+        const componentInput = editItemModal.querySelector('#component');
+        const partsNameInput = editItemModal.querySelector('#partsName');
+        const partsNumberInput = editItemModal.querySelector('#partsNumber');
+        const quantityInput = editItemModal.querySelector('#quantity');
+        const itemPriceInput = editItemModal.querySelector('#itemPrice');
+        const rackInput = editItemModal.querySelector('#rack');
+        const taxInput = editItemModal.querySelector('#tax');
+        const totalAmountInput = editItemModal.querySelector('#totalAmount');
+        const picInput = editItemModal.querySelector('#pic');
+        const poInput = editItemModal.querySelector('#po');
+        const ctplInput = editItemModal.querySelector('#ctpl');
+        
+        if (componentInput) componentInput.value = component;
+        if (partsNameInput) partsNameInput.value = partsName;
+        if (partsNumberInput) partsNumberInput.value = partsNumber;
+        if (quantityInput) quantityInput.value = quantity;
+        if (itemPriceInput) itemPriceInput.value = itemPrice;
+        if (rackInput) rackInput.value = rack !== 'N/A' ? rack : '';
+        if (taxInput) taxInput.value = tax;
+        if (totalAmountInput) totalAmountInput.value = totalAmount;
+        if (picInput) picInput.value = pic !== 'N/A' ? pic : '';
+        if (poInput) poInput.value = po !== 'N/A' ? po : '';
+        if (ctplInput) ctplInput.value = ctpl !== 'N/A' ? ctpl : '';
+        
+        // Set the date
+        if (dateDisplay) dateDisplay.value = date;
+        if (dateInput) {
+            // Convert date from DD/MM/YYYY to YYYY-MM-DD
+            const dateParts = date.split('/');
+            if (dateParts.length === 3) {
+                const day = dateParts[0];
+                const month = dateParts[1];
+                const year = dateParts[2];
+                dateInput.value = `${year}-${month}-${day}`;
+            }
+        }
+        
+        // Set the image preview if available
+        if (imgSrc && imgSrc.startsWith('data:image')) {
+            uploadedImageData = imgSrc;
+            if (imageDisplay) imageDisplay.value = 'Current Image';
+        } else {
+            uploadedImageData = null;
+            if (imageDisplay) imageDisplay.value = '';
+        }
+        
+        // Show the modal
+        editItemModal.classList.add('active');
+    };
+    
+    // Function to update a row in the table
+    function updateTableRow(row, component, partsName, partsNumber, quantity, itemPrice, date, imageData, rack = 'N/A', tax = '0.00', totalAmount = '0.00', pic = 'N/A', po = 'N/A', ctpl = 'N/A') {
+        // Update data attributes
+        row.dataset.rack = rack;
+        row.dataset.tax = formatPeso(tax);
+        row.dataset.totalAmount = formatPeso(totalAmount);
+        row.dataset.pic = pic;
+        row.dataset.po = po;
+        row.dataset.ctpl = ctpl;
+        
+        // Determine what to use for the image
+        const existingImg = row.querySelector('.image-cell img');
+        if (imageData && existingImg) {
+            existingImg.src = imageData;
+            existingImg.alt = partsName;
+        } else if (!existingImg) {
+            const imgHtml = imageData ? 
+                `<img src="${imageData}" alt="${partsName}" style="width:50px; height:40px; object-fit:contain;">` : 
+                `<img src="/api/placeholder/60/40" alt="Part Image">`;
+            
+            const imageCell = row.querySelector('.image-cell');
+            if (imageCell) imageCell.innerHTML = imgHtml;
+        }
+        
+        // Format the price with peso sign and commas
+        const formattedPrice = formatPeso(itemPrice);
+        
+        // Update visible cells
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 8) {
+            cells[1].textContent = date;
+            cells[2].textContent = partsNumber;
+            cells[3].textContent = partsName;
+            cells[4].textContent = component;
+            cells[5].textContent = quantity;
+            cells[6].textContent = formattedPrice;
+        }
+    }
+}
+
+// Update the edit button event listeners to use the edit modal
+function updateEditButtonEvents() {
+    const editButtons = document.querySelectorAll('.edit-btn');
+    editButtons.forEach(btn => {
+        // Remove any existing event listeners (optional, may cause issues)
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        
+        newBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent row click
+            const row = newBtn.closest('tr');
+            window.populateEditForm(row);
+        });
+    });
+}
+
+// Initialize the edit modal functionality when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup the edit modal
+    setupEditItemModal();
+    
+    // Update edit button events
+    updateEditButtonEvents();
+    
+    // Also add a MutationObserver to handle newly added rows
+    const tableBody = document.querySelector('.inventory-table tbody');
+    if (tableBody) {
+        const observer = new MutationObserver(function(mutations) {
+            updateEditButtonEvents();
+        });
+        
+        observer.observe(tableBody, { childList: true });
+    }
+});
