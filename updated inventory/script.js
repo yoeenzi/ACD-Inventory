@@ -75,9 +75,68 @@ addItemButton.addEventListener('click', () => {
 
 // Make Excel button functionality
 const makeExcelButton = document.querySelector('.btn-secondary');
-makeExcelButton.addEventListener('click', () => {
-    alert('Exporting to Excel...');
-});
+makeExcelButton.addEventListener('click', exportToExcel);
+
+function exportToExcel() {
+    // Check if SheetJS (XLSX) is available
+    if (typeof XLSX === 'undefined') {
+        alert('SheetJS library is not loaded. Please include xlsx.full.min.js');
+        return;
+    }
+
+    // Select the table body
+    const tableBody = document.querySelector('.inventory-table tbody');
+    
+    // Prepare data for export
+    const exportData = [];
+
+    // Add headers
+    const headers = [
+        'Date', 
+        'Parts Number', 
+        'Parts Name', 
+        'Component', 
+        'Quantity', 
+        'PIC', 
+        'Item Price', 
+        'Tax', 
+        'Total Amount', 
+        'PO',       // Add PO header
+        'CTPL'      // Add CTPL header
+    ];
+    exportData.push(headers);
+
+    // Iterate through table rows
+    tableBody.querySelectorAll('tr').forEach(row => {
+        // Extract data from row, removing currency symbols and formatting
+        const rowData = [
+            row.querySelector('td:nth-child(2)').textContent, // Date
+            row.querySelector('td:nth-child(3)').textContent, // Parts Number
+            row.querySelector('td:nth-child(4)').textContent, // Parts Name
+            row.querySelector('td:nth-child(5)').textContent, // Component
+            row.querySelector('td:nth-child(6)').textContent, // Quantity
+            row.dataset.pic || 'N/A', // PIC from data attribute
+            row.querySelector('td:nth-child(7)').textContent.replace(/[^\d.]/g, ''), // Item Price (remove peso sign)
+            row.dataset.tax ? row.dataset.tax.replace(/[^\d.]/g, '') : '0.00', // Tax
+            row.dataset.totalAmount ? row.dataset.totalAmount.replace(/[^\d.]/g, '') : '0.00', // Total Amount
+            row.dataset.po || 'N/A',     // Add PO with data attribute
+            row.dataset.ctpl || 'N/A'    // Add CTPL with data attribute
+        ];
+
+        exportData.push(rowData);
+    });
+
+
+    // Create worksheet
+    const worksheet = XLSX.utils.aoa_to_sheet(exportData);
+
+    // Create workbook and add worksheet
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Inventory');
+
+    // Export to Excel file
+    XLSX.writeFile(workbook, 'inventory_export_' + new Date().toISOString().split('T')[0] + '.xlsx');
+}
 
 // Filter button functionality
 const filterButton = document.querySelector('.btn-outline');
@@ -248,8 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const tax = document.getElementById('tax').value || '0.00';
         const totalAmount = document.getElementById('totalAmount').value || '0.00';
         const pic = document.getElementById('pic') ? document.getElementById('pic').value : 'N/A';
-        const po = document.getElementById('po') ? document.getElementById('po').value : 'N/A';
-        const ctpl = document.getElementById('ctpl') ? document.getElementById('ctpl').value : 'N/A';
+        const po = document.getElementById('poNumber') ? document.getElementById('poNumber').value : 'N/A';
+        const ctpl = document.getElementById('ctplNumber') ? document.getElementById('ctplNumber').value : 'N/A';
         
         // Add row to inventory table with all details
         addItemToTable(component, partsName, partsNumber, quantity, itemPrice, date, uploadedImageData, rack, tax, totalAmount, pic, po, ctpl);
@@ -271,8 +330,8 @@ document.addEventListener('DOMContentLoaded', function() {
         newRow.dataset.tax = formatPeso(tax);
         newRow.dataset.totalAmount = formatPeso(totalAmount);
         newRow.dataset.pic = pic;
-        newRow.dataset.po = po;
-        newRow.dataset.ctpl = ctpl;
+        newRow.dataset.po = po || 'N/A';
+        newRow.dataset.ctpl = ctpl || 'N/A';
         
         // Determine what to use for the image
         const imageHtml = imageData ? 
@@ -343,9 +402,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const editBtn = row.querySelector('.edit-btn');
         const deleteBtn = row.querySelector('.delete-btn');
         
+        // Existing view button event listener
         viewBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent row click
-            
+         e.stopPropagation(); // Prevent row click
+    
             // Extract all available data from the row
             const date = row.querySelector('td:nth-child(2)').textContent;
             const partsNumber = row.querySelector('td:nth-child(3)').textContent;
@@ -353,19 +413,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const component = row.querySelector('td:nth-child(5)').textContent;
             const quantity = row.querySelector('td:nth-child(6)').textContent;
             const itemPrice = row.querySelector('td:nth-child(7)').textContent;
-            
+    
             // Get image if available
             const imgElement = row.querySelector('.image-cell img');
             const imgSrc = imgElement && imgElement.src ? imgElement.src : '/api/placeholder/400/300';
-            
+    
             // For additional fields that might not be visible in the table,
-            // we can try to extract them from data attributes or use placeholder values
+            // we can extract them from data attributes
             const rack = row.dataset.rack || 'N/A';
             const tax = row.dataset.tax || '₱0.00';
-            const totalAmount = row.dataset.totalAmount || itemPrice; // Default to item price if not available
+            const totalAmount = row.dataset.totalAmount || itemPrice;
             const pic = row.dataset.pic || 'N/A';
-            const po = row.dataset.po || 'N/A';
-            const ctpl = row.dataset.ctpl || 'N/A';
+            const po = row.dataset.po || 'N/A';  // Ensure PO is extracted
+            const ctpl = row.dataset.ctpl || 'N/A';  // Ensure CTPL is extracted
+    
             
             // Create a comprehensive view modal
             const viewModal = document.createElement('div');
@@ -667,8 +728,8 @@ function setupEditModalEventListeners() {
             const tax = editItemModal.querySelector('#tax').value || '0.00';
             const totalAmount = editItemModal.querySelector('#totalAmount').value || '0.00';
             const pic = editItemModal.querySelector('#pic') ? editItemModal.querySelector('#pic').value : 'N/A';
-            const po = editItemModal.querySelector('#po') ? editItemModal.querySelector('#po').value : 'N/A';
-            const ctpl = editItemModal.querySelector('#ctpl') ? editItemModal.querySelector('#ctpl').value : 'N/A';
+            const po = document.getElementById('poNumber') ? document.getElementById('poNumber').value : 'N/A';
+            const ctpl = document.getElementById('ctplNumber') ? document.getElementById('ctplNumber').value : 'N/A';
             
             // Update row in inventory table
             updateTableRow(editingRow, component, partsName, partsNumber, quantity, itemPrice, date, uploadedImageData, rack, tax, totalAmount, pic, po, ctpl);
@@ -715,8 +776,8 @@ function setupEditModalEventListeners() {
         const taxInput = editItemModal.querySelector('#tax');
         const totalAmountInput = editItemModal.querySelector('#totalAmount');
         const picInput = editItemModal.querySelector('#pic');
-        const poInput = editItemModal.querySelector('#po');
-        const ctplInput = editItemModal.querySelector('#ctpl');
+        const poInput = editItemModal.querySelector('#poNumber');
+        const ctplInput = editItemModal.querySelector('#ctplNumber');
         
         if (componentInput) componentInput.value = component;
         if (partsNameInput) partsNameInput.value = partsName;
@@ -728,7 +789,7 @@ function setupEditModalEventListeners() {
         if (totalAmountInput) totalAmountInput.value = totalAmount;
         if (picInput) picInput.value = pic !== 'N/A' ? pic : '';
         if (poInput) poInput.value = po !== 'N/A' ? po : '';
-        if (ctplInput) ctplInput.value = ctpl !== 'N/A' ? ctpl : '';
+        if (ctplInput) ctplInput.value = ctpl !== 'N/A' ? ctpl : ''; 
         
         // Set the date
         if (dateDisplay) dateDisplay.value = date;
