@@ -1,0 +1,285 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: #0C2452;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #0C2452;
+    overflow: hidden;
+}
+
+/* Left side - Equipment Image */
+.equipment-image {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 0 0 20px; /* Increased corner radius */
+    margin: 0;
+    box-shadow: none;
+    transform: translateX(15px); /* Move slightly to the right */
+}
+
+.equipment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Show the full excavator */
+    object-position: center center; /* Center the image */
+}
+
+/* Right side - Login Section */
+.login-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 0 40px;
+}
+
+.login-content {
+    width: 100%;
+    max-width: 450px; /* Increased from 350px to 450px to make the form wider */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo {
+    margin-bottom: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    max-width: 180px; /* Increased from 120px to 180px */
+    height: auto;
+}
+
+.logo p {
+    font-size: 14px; /* Increased from 10px to 14px */
+    letter-spacing: 1px;
+    margin-top: 5px; /* Increased from 2px to 5px */
+    color: #ccc;
+    text-transform: uppercase;
+}
+
+/* Welcome section */
+.welcome {
+    margin-bottom: 20px; /* Increased from 15px to 20px */
+    width: 100%;
+}
+
+.welcome h1 {
+    font-size: 32px; /* Increased from 24px to 32px */
+    margin-bottom: 10px; /* Increased from 5px to 10px */
+    display: flex;
+    align-items: center;
+}
+
+.wave-emoji {
+    margin-left: 8px; /* Increased from 5px to 8px */
+    font-size: 32px; /* Match the h1 font size */
+}
+
+.welcome p {
+    color: #aaa;
+    font-size: 18px; /* Increased from 14px to 18px */
+    margin-top: 5px; /* Increased from 2px to 5px */
+}
+
+/* Form styling */
+.login-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px; /* Increased from 15px to 20px */
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px; /* Increased from 5px to 8px */
+    font-size: 16px; /* Increased from 12px to 16px */
+    color: #aaa;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 16px 20px; /* Increased from 12px 15px to 16px 20px */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px; /* Increased from 4px to 6px */
+    color: white;
+    font-size: 18px; /* Increased from 14px to 18px */
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Password toggle eye icon */
+.password-toggle {
+    position: absolute;
+    right: 20px; /* Increased from 15px to 20px */
+    top: 45px; /* Adjusted from 37px to 45px to account for larger labels */
+    cursor: pointer;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    font-size: 20px; /* Increased from 16px to 20px */
+}
+
+/* Remember me and forgot password */
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px; /* Increased from 12px to 16px */
+    margin-bottom: 25px; /* Increased from 20px to 25px */
+    width: 100%;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 10px; /* Increased from 8px to 10px */
+    transform: scale(1.2); /* Make checkbox slightly larger */
+}
+
+.forgot-link {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Login button */
+.login-btn {
+    width: 100%;
+    padding: 16px; /* Increased from 12px to 16px */
+    background-color: white;
+    color: #0a1b46;
+    border: none;
+    border-radius: 6px; /* Increased from 4px to 6px */
+    font-weight: bold;
+    font-size: 18px; /* Increased from 14px to 18px */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 25px; /* Increased from 20px to 25px */
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Footer with Hyundai logo */
+.company-footer {
+    margin-top: 15px; /* Increased from 10px to 15px */
+    text-align: center;
+}
+
+.company-footer img {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .equipment-image {
+        height: 35vh;
+        transform: translateX(0); /* Reset transform on mobile */
+        border-radius: 0; /* Reset border radius on mobile */
+    }
+    
+    .login-section {
+        flex: none;
+        padding: 20px;
+    }
+    
+    .login-content {
+        max-width: 400px; /* Adjusted for tablet */
+    }
+    
+    .company-footer img {
+        max-width: 150px;
+    }
+}
+
+/* Additional styles for extra small devices */
+@media (max-width: 480px) {
+    .equipment-image {
+        height: 25vh;
+    }
+    
+    .login-content {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .logo img {
+        max-width: 140px; /* Still larger than original but adjusted for mobile */
+    }
+    
+    .welcome h1 {
+        font-size: 28px; /* Adjusted for mobile but still larger than original */
+    }
+    
+    .form-group input,
+    .login-btn {
+        padding: 14px; /* Slightly reduced padding for mobile */
+        font-size: 16px; /* Slightly reduced font size for mobile */
+    }
+}
+/* Password toggle styling */
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 45px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: color 0.2s;
+}
+
+.password-toggle:hover {
+    color: #fff;
+}
