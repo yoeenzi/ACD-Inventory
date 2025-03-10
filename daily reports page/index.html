@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACD Smart Inventory System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="ACD Logo.png" alt="ACD">
+                    <span>SMART INVENTORY SYSTEM</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="#"><i class="fas fa-th-large"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-box"></i> Inventory</a>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fas fa-chart-bar"></i> Daily Reports</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fas fa-qrcode"></i> Scan Item</a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="theme-toggle">
+                <button id="light-mode" class="theme-btn active"><i class="fas fa-sun"></i> Light</button>
+                <button id="dark-mode" class="theme-btn"><i class="fas fa-moon"></i> Dark</button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="user-welcome">
+                    <h1>Hello Manticao - ACD <span class="wave">👋</span></h1>
+                    <p>Good Morning</p>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="search-global">
+                        <input type="text" placeholder="Search">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="notification">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                        <div class="notification-dropdown">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Parts Name: Hyundai Radiator (PN: 21231-21112) has been put to inventory</p>
+                                        <span class="notification-time">Just now</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Parts Name: Caterpillar Filter (PN: 1R-0749) has been put to inventory</p>
+                                        <span class="notification-time">10 minutes ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Parts Name: Komatsu Hydraulic Pump (PN: 708-1L-00640) has been put to inventory</p>
+                                        <span class="notification-time">1 hour ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <div class="notification-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="notification-content">
+                                        <p class="notification-text">Parts Name: Hitachi Track Link (PN: KH180-3) has been put to inventory</p>
+                                        <span class="notification-time">Yesterday</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#" class="view-all">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <img src="lebron.avif" alt="Profile">
+                        <div class="user-info">
+                            <span class="user-name">Manticao-ACD</span>
+                            <span class="user-role">Administrator</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Page Title and Controls -->
+            <div class="page-header">
+                <h2>Daily Reports</h2>
+                <div class="page-controls">
+                    <div class="date-filter">
+                        <label for="date-select">Date Range:</label>
+                        <select id="date-select">
+                            <option value="today">Today</option>
+                            <option value="yesterday">Yesterday</option>
+                            <option value="last7days">Last 7 Days</option>
+                            <option value="last30days">Last 30 Days</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                    <button class="export-btn"><i class="fas fa-file-export"></i> Export</button>
+                    <button class="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+            </div>
+            
+            <!-- Notification Table -->
+            <div class="notification-table-container">
+                <div class="table-header">
+                    <h3>Recent Inventory Updates</h3>
+                    <div class="table-filters">
+                        <input type="text" placeholder="Search items..." class="table-search">
+                        <select class="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="added">Added Items</option>
+                            <option value="removed">Removed Items</option>
+                            <option value="updated">Updated Items</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <table class="notification-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Item Name</th>
+                            <th>Part Number</th>
+                            <th>Action</th>
+                            <th>Quantity</th>
+                            <th>Component</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlighted">
+                            <td>
+                                <span class="timestamp">Mar 7, 2025 9:45 AM</span>
+                                <span class="time-ago">Just now</span>
+                            </td>
+                            <td>Hyundai Radiator</td>
+                            <td>21231-21112</td>
+                            <td><span class="action-badge added">Added to Inventory</span></td>
+                            <td>5 units</td>
+                            <td>Hydraulic</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr class="highlighted">
+                            <td>
+                                <span class="timestamp">Mar 7, 2025 9:35 AM</span>
+                                <span class="time-ago">10 minutes ago</span>
+                            </td>
+                            <td>Caterpillar Filter</td>
+                            <td>1R-0749</td>
+                            <td><span class="action-badge added">Added to Inventory</span></td>
+                            <td>12 units</td>
+                            <td>Mechanical</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr class="highlighted">
+                            <td>
+                                <span class="timestamp">Mar 7, 2025 8:45 AM</span>
+                                <span class="time-ago">1 hour ago</span>
+                            </td>
+                            <td>Komatsu Hydraulic Pump</td>
+                            <td>708-1L-00640</td>
+                            <td><span class="action-badge added">Added to Inventory</span></td>
+                            <td>2 units</td>
+                            <td>Engine</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="timestamp">Mar 6, 2025 2:15 PM</span>
+                                <span class="time-ago">Yesterday</span>
+                            </td>
+                            <td>Hitachi Track Link</td>
+                            <td>KH180-3</td>
+                            <td><span class="action-badge added">Added to Inventory</span></td>
+                            <td>8 units</td>
+                            <td>Electronic</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="timestamp">Mar 6, 2025 11:30 AM</span>
+                                <span class="time-ago">Yesterday</span>
+                            </td>
+                            <td>Doosan Air Filter</td>
+                            <td>400504-00222</td>
+                            <td><span class="action-badge updated">Updated in Inventory</span></td>
+                            <td>10 units</td>
+                            <td>Mechanical</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="timestamp">Mar 6, 2025 9:15 AM</span>
+                                <span class="time-ago">Yesterday</span>
+                            </td>
+                            <td>Volvo Engine Oil</td>
+                            <td>VOE11708675</td>
+                            <td><span class="action-badge removed">Removed from Inventory</span></td>
+                            <td>3 units</td>
+                            <td>Hydraulic</td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="items-per-page">
+                    <span>Showing</span>
+                    <select id="items-per-page">
+                        <option value="6">6</option>
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                    </select>
+                </div>
+                
+                <div class="pagination-info">
+                    <span>Showing 1 to 6 out of 12 entries</span>
+                </div>
+                
+                <div class="pagination-controls">
+                    <button class="page-btn prev"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn page active">1</button>
+                    <button class="page-btn page">2</button>
+                    <button class="page-btn next"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+            </div>
+        </main>
+    </div>
+    <!-- Add this right before the pagination-container div -->
+<div class="empty-state">
+    <div class="empty-illustration">
+        <i class="fas fa-search" style="font-size: 48px; color: #ccc;"></i>
+    </div>
+    <p class="empty-message">No matching items found</p>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
