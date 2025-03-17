@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACD Smart Inventory System</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="additional-styles.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="sidebar">
@@ -16,12 +16,12 @@
             <div class="logo-text">SMART INVENTORY SYSTEM</div>
         </div>
         
-        <div class="nav-item">
+        <div class="nav-item active">
             <i class="fas fa-th-large"></i>
             <span>Dashboard</span>
         </div>
         
-        <div class="nav-item active">
+        <div class="nav-item">
             <i class="fas fa-box"></i>
             <span>Inventory</span>
         </div>
@@ -66,7 +66,7 @@
                 </div>
                 
                 <div class="user-profile">
-                    <img src="lamelo.jfif" alt="User Avatar" class="user-avatar">
+                    <img src="lebron.avif" alt="User Avatar" class="user-avatar">
                     <div class="user-info">
                         <div class="user-name">Manticao-ACD</div>
                         <div class="user-role">Store Manager</div>
@@ -75,303 +75,142 @@
             </div>
         </div>
         
-        <div class="action-bar">
-            <div class="search-item">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search Item">
+        <div class="card">
+            <div class="report-title">Stock Report</div>
+            
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color blue"></div>
+                    <span>Stock In</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color purple"></div>
+                    <span>Stock Out</span>
+                </div>
             </div>
             
-            <div class="action-buttons">
-                <button class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Add Item
-                </button>
-                <button class="btn btn-secondary">
-                    <i class="fas fa-file-excel"></i>
-                    Make Excel
-                </button>
-                <button class="btn btn-outline">
-                    <i class="fas fa-filter"></i>
-                    Filter
-                </button>
+            <div class="chart-container">
+                <div class="empty-chart-message">No stock data available. Add products to view the report.</div>
+                <canvas id="stockChart" style="display: none;"></canvas>
             </div>
         </div>
         
-        <table class="inventory-table">
-            <thead>
-                <tr>
-                    <th class="checkbox-cell">
-                        <input type="checkbox">
-                    </th>
-                    <th>Date</th>
-                    <th>Parts Number</th>
-                    <th>Parts Name</th>
-                    <th>Component</th>
-                    <th>Quantity</th>
-                    <th>Item Price</th>
-                    <th class="image-cell">Image</th>
-                    <th class="action-cell">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="checkbox-cell">
-                        <input type="checkbox">
-                    </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="image-cell"></td>
-                    <td class="action-cell">
-                        <div class="action-buttons-cell">
-                            <div class="action-btn view-btn">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="action-btn edit-btn">
-                                <i class="fas fa-edit"></i>
-                            </div>
-                            <div class="action-btn delete-btn">
-                                <i class="fas fa-trash"></i>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="pagination">
-            <div class="page-info">
-                Showing 
-                <select>
-                    <option>10</option>
-                    <option>20</option>
-                    <option>50</option>
-                </select>
-                Showing 1 to 10 out of 49 records
-            </div>
+        <div class="card">
+            <div class="report-title">Item Summary</div>
             
-            <div class="page-numbers">
-                <div class="page-btn">
-                    <i class="fas fa-chevron-left"></i>
+            <div class="summary-container">
+                <div class="summary-item">
+                    <div class="summary-icon box">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Quantity in Hand</div>
                 </div>
-                <div class="page-btn active">1</div>
-                <div class="page-btn">2</div>
-                <div class="page-btn">3</div>
-                <div class="page-btn">4</div>
-                <div class="page-btn">
-                    <i class="fas fa-chevron-right"></i>
+                
+                <div class="summary-item">
+                    <div class="summary-icon in">
+                        <i class="fas fa-arrow-circle-down"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Stock In Products</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div class="summary-icon out">
+                        <i class="fas fa-arrow-circle-up"></i>
+                    </div>
+                    <div class="summary-value">0</div>
+                    <div class="summary-label">Stock Out Products</div>
                 </div>
             </div>
         </div>
         
-        <div class="footer">
-            <img src="backhoe.png" alt="Excavators Lineup" class="footer-image">
+<!-- Replace the existing inventory-section content in your index.html with this -->
+<div class="content-section inventory-section">
+    <div class="header">
+        <div class="greeting">
+            <h2>Inventory Management<i class="fas fa-certificate verification-badge"></i></h2>
+            <span>Track and manage your inventory</span>
         </div>
     </div>
-    <!-- Add Item Modal HTML -->
+    
+    <!-- Search and Action Buttons -->
+    <div class="inventory-actions-top">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Item" id="inventory-search">
+        </div>
+        
+        <div class="action-buttons">
+            <button class="action-btn add-btn" id="add-inventory-btn"><i class="fas fa-plus"></i> Add Item</button>
+            <button class="action-btn excel-btn" id="export-excel-btn"><i class="fas fa-file-excel"></i> Make Excel</button>
+            <button class="action-btn filter-btn"><i class="fas fa-filter"></i> Filter</button>
+        </div>
+    </div>
+    
+    <!-- Inventory Table -->
+    <div class="card inventory-card">
+        <div class="inventory-table-container">
+            <table class="inventory-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all"></th>
+                        <th>Date <i class="fas fa-sort"></i></th>
+                        <th>Parts Number</th>
+                        <th>Parts Name</th>
+                        <th>Component</th>
+                        <th>Quantity</th>
+                        <th>Item Price</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <td><input type="checkbox" class="row-select"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="image-cell"></td>
+                        <td class="action-cell">
+                            <button class="icon-btn view-btn"><i class="fas fa-eye"></i></button>
+                            <button class="icon-btn edit-btn"><i class="fas fa-edit"></i></button>
+                            <button class="icon-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination-container">
+            <div class="showing-info">
+                <span>Showing</span>
+                <select id="rows-per-page">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <div class="records-info">
+                <span>Showing 1 to 10 out of 40 records</span>
+            </div>
+            <div class="pagination-controls">
+                <button class="pagination-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="pagination-btn page-btn active">1</button>
+                <button class="pagination-btn page-btn">2</button>
+                <button class="pagination-btn page-btn">3</button>
+                <button class="pagination-btn page-btn">4</button>
+                <button class="pagination-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Item Modal HTML - Add this to the end of your body element -->
 <div class="modal" id="addItemModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -420,7 +259,7 @@
                             <label for="image" class="file-input-label">
                                 <i class="fas fa-paperclip"></i>
                             </label>
-                            <input type="file" id="image" hidden accept="image/*">
+                            <input type="file" id="image" style="display: none;" accept="image/*">
                         </div>
                     </div>
                     <div class="form-group">
@@ -448,7 +287,7 @@
                         <label for="date">Date</label>
                         <div class="date-input-wrapper">
                             <input type="text" id="dateDisplay" readonly placeholder="Select a date">
-                            <input type="date" id="date" style="position: absolute; opacity: 0;">
+                            <input type="date" id="date" style="position: absolute; opacity: 0; width: 100%; height: 100%; top: 0; left: 0; cursor: pointer;">
                             <label for="date" class="date-input-label">
                                 <i class="fas fa-calendar"></i>
                             </label>
@@ -492,6 +331,210 @@
         </div>
     </div>
 </div>
+<!-- Add this to your HTML file, just before the closing body tag -->
+
+<!-- Profile Dropdown Menu -->
+<div class="profile-dropdown" id="profileDropdown">
+    <div class="dropdown-item" id="editProfileBtn">
+        <i class="fas fa-user-edit"></i>
+        <span>Edit Profile</span>
+    </div>
+    <div class="dropdown-item" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal" id="editProfileModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Edit Profile</h3>
+            <span class="close-button">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="editProfileForm">
+                <div class="profile-image-container">
+                    <div class="profile-image">
+                        <img id="profilePreview" src="lebron.png" alt="Profile Preview">
+                        <div class="image-overlay">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <input type="file" id="profileImage" accept="image/*" hidden>
+                    </div>
+                    <div class="profile-image-text">Change Profile Picture</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="profileName">Full Name *</label>
+                        <input type="text" id="profileName" placeholder="Enter your full name" value="Manticao-ACD" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="profileEmail">Company Email *</label>
+                        <input type="email" id="profileEmail" placeholder="Enter your company email" value="manticao@acd.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="currentPassword">Current Password *</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="currentPassword" placeholder="Enter current password" required>
+                            <div class="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="newPassword">New Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="newPassword" placeholder="Enter new password">
+                            <div class="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+                            <div class="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                        </div>
+                        <div id="passwordMismatch" class="error-message" style="display: none;">
+                            Passwords do not match
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="cancelProfileButton" class="btn btn-light">Cancel</button>
+            <button id="saveProfileButton" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div>
+</div>
+<!-- Add this to your HTML file, just after the user-profile div -->
+
+<!-- Notification Dropdown -->
+<div class="notification-dropdown" id="notificationDropdown">
+    <div class="notification-header">
+        <h3>Notifications</h3>
+        <div class="notification-actions">
+            <span class="mark-all-read">Mark all as read</span>
+            <span class="view-all">View All</span>
+        </div>
+    </div>
+    
+    <div class="notification-list">
+        <!-- Notification Item Template -->
+        <div class="notification-item unread">
+            <div class="notification-icon stock-in">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Stock In: Engine Oil Filter</div>
+                <div class="notification-details">
+                    <span class="product-number">Part #ENG-104</span>
+                    <span class="quantity">+15 units</span>
+                </div>
+                <div class="notification-time">10 minutes ago</div>
+            </div>
+            <div class="notification-actions">
+                <span class="mark-read"><i class="fas fa-check"></i></span>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <div class="notification-icon stock-out">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Stock Out: Hydraulic Pump</div>
+                <div class="notification-details">
+                    <span class="product-number">Part #HYD-221</span>
+                    <span class="quantity">-2 units</span>
+                </div>
+                <div class="notification-time">2 hours ago</div>
+            </div>
+            <div class="notification-actions">
+                <span class="mark-read"><i class="fas fa-check"></i></span>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <div class="notification-icon low-stock">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Low Stock Alert: Fuel Filter</div>
+                <div class="notification-details">
+                    <span class="product-number">Part #ENG-118</span>
+                    <span class="quantity">3 units remaining</span>
+                </div>
+                <div class="notification-time">Yesterday</div>
+            </div>
+            <div class="notification-actions">
+                <span class="mark-read"><i class="fas fa-check"></i></span>
+            </div>
+        </div>
+        
+        <div class="notification-item unread">
+            <div class="notification-icon stock-in">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Stock In: Control Valve</div>
+                <div class="notification-details">
+                    <span class="product-number">Part #HYD-305</span>
+                    <span class="quantity">+8 units</span>
+                </div>
+                <div class="notification-time">Yesterday</div>
+            </div>
+            <div class="notification-actions">
+                <span class="mark-read"><i class="fas fa-check"></i></span>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <div class="notification-icon maintenance">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="notification-content">
+                <div class="notification-title">Maintenance Task Completed</div>
+                <div class="notification-details">
+                    <span class="product-number">Task #MT-112</span>
+                    <span class="quantity">Inventory Rack A2</span>
+                </div>
+                <div class="notification-time">2 days ago</div>
+            </div>
+            <div class="notification-actions">
+                <span class="mark-read"><i class="fas fa-check"></i></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification-footer">
+        <a href="#" class="view-reports">View Daily Reports</a>
+    </div>
+</div>
+    <div class="footer">
+        <img src="backhoe.png" alt="Excavators Lineup" class="footer-image" onerror="this.onerror=null; this.src='/api/placeholder/800/150'; this.alt='Excavators Lineup (Placeholder)';">
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
